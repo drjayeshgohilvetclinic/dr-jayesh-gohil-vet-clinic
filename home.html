@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Jayesh Gohil Vet Clinic - હોમ પેજ</title>
+    <!-- Google Fonts for Clean Gujarati -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Noto Sans Gujarati', sans-serif; margin: 0; padding: 0; }
+        body { background: linear-gradient(135deg, #eef5f9 0%, #d6e8f5 100%); min-height: 100vh; padding: 20px; color: #333; }
+        .container { max-width: 750px; margin: 0 auto; }
+        
+        /* Doctor Profile Card */
+        .doctor-card { background: #ffffff; border-radius: 16px; padding: 25px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-top: 6px solid #107c41; margin-bottom: 20px; }
+        .doctor-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #107c41; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .doctor-name { color: #107c41; font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+        .degree { color: #555; font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+        .experience-badge { background: #e8f5e9; color: #2e7d32; display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 600; margin: 4px 0; }
+        
+        .welcome-msg { text-align: center; color: #444; font-size: 16px; font-weight: 600; margin: 20px 0; background: #ffffff; padding: 12px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 25px; }
+        .service-card { background: #ffffff; border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 1px solid #e0e0e0; transition: transform 0.2s; }
+        .service-card:hover { transform: translateY(-3px); }
+        .service-icon { font-size: 32px; margin-bottom: 8px; }
+        .service-title { font-size: 18px; font-weight: 700; color: #1e3c72; margin-bottom: 8px; }
+        .service-desc { font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 15px; }
+        
+        /* Action Buttons */
+        .btn { display: block; width: 100%; padding: 12px; background: #107c41; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 15px; box-shadow: 0 3px 6px rgba(16,124,65,0.3); transition: background 0.3s; }
+        .btn:hover { background: #0b5c30; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Doctor Info -->
+    <div class="doctor-card">
+        <img src="myphoto.jpeg" alt="Dr Jayesh Gohil" class="doctor-img" onerror="this.src='https://via.placeholder.com/120'">
+        <h1 class="doctor-name">Dr. Jayesh Gohil Vet Clinic</h1>
+        <p class="degree">Bachelor of Veterinary Science and Animal Husbandry (B.V.Sc & A.H)</p>
+        <div class="experience-badge">🎖️ ૩૭ વર્ષનો બહોળો અનુભવ - ગુજરાત સરકાર</div><br>
+        <div class="experience-badge" style="background:#e3f2fd; color:#1565c0;">👨‍⚕️ Assistant Director of Animal Husbandry તરીકે નિવૃત્ત</div>
+    </div>
+
+    <div class="welcome-msg">
+        🏥 અહીં તમને પશુઓ અને પાલતુ પ્રાણીઓની ઓનલાઇન સારવાર અને સાચી ગાઇડ મળશે.
+    </div>
+
+    <!-- Services Section -->
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">🐄</div>
+            <h2 class="service-title">પશુપાલન સેવા</h2>
+            <p class="service-desc">ગાય, ભેંસ અને બળદની સારવાર તેમજ દૂધ વધારવાની વૈજ્ઞાનિક અને દેશી માહિતી.</p>
+            <a href="appointment.html" class="btn">૧. એપોઇન્ટમેન્ટ ફોર્મ ભરો</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🐕</div>
+            <h2 class="service-title">પેટ કેર (Pet Care)</h2>
+            <p class="service-desc">કૂતરા અને બિલાડી જેવા પાલતુ પ્રાણીઓની સારવાર તેમજ હેલ્થ ટિપ્સ.</p>
+            <a href="appointment.html" class="btn">૧. એપોઇન્ટમેન્ટ ફોર્મ ભરો</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

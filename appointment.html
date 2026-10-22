@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Jayesh Gohil Vet Clinic - એપોઇન્ટમેન્ટ ફોર્મ</title>
+    <!-- Google Fonts for Clean Gujarati -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Noto Sans Gujarati', sans-serif; margin: 0; padding: 0; }
+        body { background: linear-gradient(135deg, #eef5f9 0%, #d6e8f5 100%); min-height: 100vh; padding: 20px; }
+        .form-card { max-width: 480px; margin: 10px auto; background: #ffffff; border-radius: 16px; padding: 25px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-top: 6px solid #25D366; }
+        
+        .header { text-align: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .clinic-title { color: #107c41; font-size: 20px; font-weight: 700; }
+        .fee-tag { background: #fff3cd; color: #856404; display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 600; margin-top: 6px; }
+
+        label { font-weight: 600; color: #333; margin-top: 14px; display: block; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 10px 12px; margin-top: 6px; border: 1.5px solid #ccc; border-radius: 8px; font-size: 15px; background: #fafafa; transition: 0.3s; }
+        input:focus, select:focus, textarea:focus { border-color: #25D366; background: #fff; outline: none; box-shadow: 0 0 5px rgba(37,211,102,0.3); }
+
+        .btn-whatsapp { width: 100%; background-color: #25D366; color: white; padding: 13px; border: none; border-radius: 8px; font-size: 16px; margin-top: 22px; cursor: pointer; font-weight: 700; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
+        .btn-whatsapp:hover { background-color: #1eb857; }
+        .btn-home { width: 100%; background-color: #555555; color: white; padding: 11px; border: none; border-radius: 8px; font-size: 15px; margin-top: 10px; cursor: pointer; text-decoration: none; display: block; text-align: center; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <div class="header">
+        <h2 class="clinic-title">🏥 Dr. Jayesh Gohil Vet Clinic</h2>
+        <div class="fee-tag">પશુ સારવાર એપોઇન્ટમેન્ટ ફોર્મ (ફી: ₹૨૦૦)</div>
+    </div>
+
+    <form id="appointmentForm">
+        <label>👤 પશુપાલકનું નામ:</label>
+        <input type="text" id="pashupalakName" placeholder="તમારું નામ લખો" required>
+
+        <label>📞 મોબાઈલ નંબર:</label>
+        <input type="tel" id="mobileNumber" placeholder="તમારો ૧૦ આંકડાનો નંબર" required>
+
+        <label>🐄 પશુનો પ્રકાર:</label>
+        <select id="pashuType">
+            <option value="ગાય (Cow)">ગાય (Cow)</option>
+            <option value="ભેંસ (Buffalo)">ભેંસ (Buffalo)</option>
+            <option value="બળદ (Bull)">બળદ (Bull)</option>
+            <option value="કૂતરો (Dog)">કૂતરો (Dog)</option>
+            <option value="બિલાડી (Cat)">બિલાડી (Cat)</option>
+            <option value="અન્ય (Other)">અન્ય (Other)</option>
+        </select>
+
+        <label>🤒 બીમારી / લક્ષણોની વિગત:</label>
+        <textarea id="diseaseDetails" rows="3" placeholder="પશુને શું તકલીફ છે તે અહીં લખો..." required></textarea>
+
+        <button type="button" class="btn-whatsapp" onclick="sendToWhatsApp()">📲 વોટ્સએપ પર વિગતો મોકલો</button>
+        <a href="home.html" class="btn-home">🏠 હોમ પેજ પર પાછા જાઓ</a>
+    </form>
+</div>
+
+<script>
+    function sendToWhatsApp() {
+        var name = document.getElementById('pashupalakName').value.trim();
+        var phone = document.getElementById('mobileNumber').value.trim();
+        var pashu = document.getElementById('pashuType').value;
+        var details = document.getElementById('diseaseDetails').value.trim();
+
+        if (name === "" || phone === "" || details === "") {
+            alert("મહેરબાની કરીને બધી વિગતો ભરો!");
+            return;
+        }
+
+        var doctorPhone = "919825088959"; 
+
+        var textMessage = "નમસ્તે Dr. Jayesh Gohil Vet Clinic,\n\n" +
+                          "મારે એપોઇન્ટમેન્ટ લેવી છે. મારી વિગતો નીચે મુજબ છે:\n" +
+                          "👤 *નામ:* " + name + "\n" +
+                          "📞 *મોબાઈલ:* " + phone + "\n" +
+                          "🐄 *પશુ:* " + pashu + "\n" +
+                          "🤒 *બીમારી/લક્ષણો:* " + details + "\n\n" +
+                          "કૃપા કરીને મને એપોઇન્ટમેન્ટનો સમય આપશો.";
+
+        var whatsappURL = "https://api.whatsapp.com/send?phone=" + doctorPhone + "&text=" + encodeURIComponent(textMessage);
+        window.location.href = whatsappURL;
+    }
+</script>
+
+</body>
+</html>
