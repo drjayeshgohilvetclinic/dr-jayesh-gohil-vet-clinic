@@ -53,7 +53,7 @@
         <div class="pay-box">
             <h3 style="margin:0; color:#27ae60;">એડવાન્સ કન્સલ્ટેશન ફી</h3>
             <div class="fee">ફી: ₹200/-</div>
-            <p style="margin:5px 0;">નીચેનો QR Code સ્કેન કરીને ₹200 જમા કરો:</p>
+            <p style="margin:5px 0;">નીચેનો QR Code સ્કેન કરીને અથવા સ્ક્રીનશોટ પાડીને ₹200 જમા કરો:</p>
             
             <!-- QR Code Image -->
             <img src="gpay-qr.jpg" alt="Google Pay QR Code">
@@ -65,9 +65,9 @@
         <div class="instructions">
             <strong>એપોઈન્ટમેન્ટ મેળવવાની રીત:</strong>
             <ol>
-                <li>ઉપરનો QR કોડ સ્કેન કરી ₹200 પેમેન્ટ કરો.</li>
+                <li>ઉપરના QR કોડનો સ્ક્રીનશોટ પાડી Google Pay / UPI એપમાં Gallery થી ₹200 પેમેન્ટ કરો.</li>
                 <li>નીચે આપેલા <b>WhatsApp</b> બટન પર ક્લિક કરો.</li>
-                <li>ડૉક્ટર સાહેબ તમને સામેથી એપોઈન્ટમેન્ટનો સમય આપશે.</li>
+                <li>ડૉક્ટર સાહેબ પેમેન્ટ ચકાસીને તમને સામેથી એપોઈન્ટમેન્ટનો સમય આપશે.</li>
             </ol>
         </div>
 
@@ -79,23 +79,19 @@
 
 <script>
 function sendToWhatsApp() {
-    // 1. ફોર્મની વિગતો મેળવો
     var name = document.getElementById('name').value;
     var phone = document.getElementById('phone').value;
     var village = document.getElementById('village').value;
     var animal = document.getElementById('animal').value;
     var issue = document.getElementById('issue').value;
 
-    // ૨. જો વિગત અધૂરી હોય તો એલર્ટ આપો
     if(name == "" || phone == "" || village == "" || animal == "" || issue == "") {
         alert("કૃપા કરીને બધી વિગત ભરો.");
         return;
     }
 
-    // ૩. તમારો WhatsApp નંબર (દેશના કોડ 91 સાથે)
     var myPhoneNumber = "919825088959"; // અહીં તમારો 10 આંકડાનો WhatsApp નંબર લખવો
 
-    // ૪. મેસેજ તૈયાર કરો
     var message = "*નવી ઓનલાઈન એપોઈન્ટમેન્ટ રિક્વેસ્ટ*%0A%0A" +
         "*પશુપાલકનું નામ:* " + name + "%0A" +
         "*મોબાઈલ નંબર:* " + phone + "%0A" +
@@ -103,11 +99,8 @@ function sendToWhatsApp() {
         "*પશુનો પ્રકાર:* " + animal + "%0A" +
         "*પશુની તકલીફ:* " + issue + "%0A%0A" +
         "------------------------------%0A" +
-        "✅ *ફી ચુકવણી:* ₹200 જમા કરી દીધેલ છે.%0A" +
-        "------------------------------%0A" +
-        "કૃપા કરીને મને કન્સલ્ટેશન માટે અનુકૂળ સમય આપશો.";
+        "કૃપા કરીને મારી ફી ચકાસીને મને કન્સલ્ટેશન માટે અનુકૂળ સમય આપશો.";
 
-    // ૫. WhatsApp ઓપન કરો
     var whatsappUrl = "https://wa.me/" + myPhoneNumber + "?text=" + message;
     window.open(whatsappUrl, '_blank');
 }
