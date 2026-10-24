@@ -103,15 +103,15 @@ function sendToWhatsApp() {
 
     var whatsappUrl = "https://wa.me/" + myPhoneNumber + "?text=" + message;
     window.open(whatsappUrl, '_blank');
-} // Google Sheet Auto-Save Code
+} // Google Sheet Auto-Save Code (Updated)
   var scriptUrl = "https://script.google.com/macros/s/AKfycbwO9VxogsJXLqY-5Gkzmdd8K8FtK_DEZIT4JC-949t6uMhAL1VI7f1SGlEIwaNehZAN/exec";
   
   var formData = {
-    name: name,
-    phone: phone,
-    village: village,
-    animal: animal,
-    issue: issue
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    village: document.getElementById('village').value,
+    animal: document.getElementById('animal1').value,
+    issue: document.getElementById('issue').value
   };
 
   fetch(scriptUrl, {
