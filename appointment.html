@@ -103,7 +103,25 @@ function sendToWhatsApp() {
 
     var whatsappUrl = "https://wa.me/" + myPhoneNumber + "?text=" + message;
     window.open(whatsappUrl, '_blank');
-}
+} // Google Sheet Auto-Save Code
+  var scriptUrl = "https://script.google.com/macros/s/AKfycbwO9VxogsJXLqY-5Gkzmdd8K8FtK_DEZIT4JC-949t6uMhAL1VI7f1SGlEIwaNehZAN/exec";
+  
+  var formData = {
+    name: name,
+    phone: phone,
+    village: village,
+    animal: animal,
+    issue: issue
+  };
+
+  fetch(scriptUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  });
 </script>
 
 </body>
