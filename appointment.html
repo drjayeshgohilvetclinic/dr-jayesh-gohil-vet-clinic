@@ -61,32 +61,34 @@
 </div>
 
 <script>
-    function sendToWhatsApp()
-    var scriptURL = "તમારી_પેલી_વેબ_એપ_યુ.આર.એલ._(URL)_અહીં_પેસ્ટ_કરો";
-    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({name: name, phone: phone, pashu: pashu, details: details}) }); {
-        var name = document.getElementById('pashupalakName').value.trim();
-        var phone = document.getElementById('mobileNumber').value.trim();
-        var pashu = document.getElementById('pashuType').value;
-        var details = document.getElementById('diseaseDetails').value.trim();
+function sendToWhatsApp() {
+    var name = document.getElementById('pashupalakName').value.trim();
+    var phone = document.getElementById('mobileNumber').value.trim();
+    var pashu = document.getElementById('pashuType').value;
+    var details = document.getElementById('diseaseDetails').value.trim();
 
-        if (name === "" || phone === "" || details === "") {
-            alert("મહેરબાની કરીને બધી વિગતો ભરો!");
-            return;
-        }
-
-        var doctorPhone = "919825088959"; 
-
-        var textMessage = "નમસ્તે Dr. Jayesh Gohil Vet Clinic,\n\n" +
-                          "મારે એપોઇન્ટમેન્ટ લેવી છે. મારી વિગતો નીચે મુજબ છે:\n" +
-                          "👤 *નામ:* " + name + "\n" +
-                          "📞 *મોબાઈલ:* " + phone + "\n" +
-                          "🐄 *પશુ:* " + pashu + "\n" +
-                          "🤒 *બીમારી/લક્ષણો:* " + details + "\n\n" +
-                          "કૃપા કરીને મને એપોઇન્ટમેન્ટનો સમય આપશો.";
-
-        var whatsappURL = "https://api.whatsapp.com/send?phone=" + doctorPhone + "&text=" + encodeURIComponent(textMessage);
-        window.location.href = whatsappURL;
+    if (name === "" || phone === "" || details === "") {
+        alert("મહેરબાની કરીને બધી વિગતો ભરો!");
+        return;
     }
+
+    // ગૂગલ શીટમાં ડેટા મોકલવા માટે
+    var scriptURL = "https://script.google.com/macros/s/AKfycbwM2MHRETOwmY-hXhQt3PsJWXtfd5BJHbArg0zbJXX5RLO-Ypi3xqytRIyx71244kIV/exec";
+    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({name: name, phone: phone, pashu: pashu, details: details}) });
+
+    // WhatsApp પર મેસેજ મોકલવા માટે
+    var doctorPhone = "919825088959";
+    var textMessage = "🩺 Dr. Jayesh Gohil Vet Clinic, Vartej\n" +
+                      "📋 નવું એપોઇન્ટમેન્ટ ફોર્મ ભરેલ છે:\n" +
+                      "👤 પશુપાલક: " + name + "\n" +
+                      "📞 મોબાઇલ: " + phone + "\n" +
+                      "🐄 પશુ: " + pashu + "\n" +
+                      "📝 બીમારી/લક્ષણો: " + details + "\n" +
+                      "કૃપા કરીને આ એપોઇન્ટમેન્ટ સ્વીકાર કરવા વિનંતી.";
+    
+    var whatsappURL = "https://api.whatsapp.com/send?phone=" + doctorPhone + "&text=" + encodeURIComponent(textMessage);
+    window.location.href = whatsappURL;
+}
 </script>
 
 </body>
