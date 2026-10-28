@@ -73,7 +73,7 @@ function sendToWhatsApp() {
     }
 
     // ગૂગલ શીટમાં ડેટા મોકલવા માટે
-    var scriptURL = "https://script.google.com/macros/s/AKfycbwM2MHRETOwmY-hXhQt3PsJWXtfd5BJHbArg0zbJXX5RLO-Ypi3xqytRIyx71244kIV/exec";
+    var scriptURL = "https://script.google.com/macros/s/AKfycbyVH3YcpFqSCSg-IS-ebwChYzZDyc_l3uwkzX7bgCj2IuMi_yJ6UcoFESNEH9ldaJgC/exec";
     fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({name: name, phone: phone, pashu: pashu, details: details}) });
 
     // WhatsApp પર મેસેજ મોકલવા માટે
