@@ -61,7 +61,9 @@
 </div>
 
 <script>
-    function sendToWhatsApp() {
+    function sendToWhatsApp()
+    var scriptURL = "તમારી_પેલી_વેબ_એપ_યુ.આર.એલ._(URL)_અહીં_પેસ્ટ_કરો";
+    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({name: name, phone: phone, pashu: pashu, details: details}) }); {
         var name = document.getElementById('pashupalakName').value.trim();
         var phone = document.getElementById('mobileNumber').value.trim();
         var pashu = document.getElementById('pashuType').value;
