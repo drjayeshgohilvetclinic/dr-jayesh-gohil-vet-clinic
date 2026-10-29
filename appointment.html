@@ -65,17 +65,18 @@
 function sendToWhatsApp() {
     var name = document.getElementById('pashupalakName').value.trim();
     var phone = document.getElementById('mobileNumber').value.trim();
+    var village = document.getElementById('village').value.trim();
     var pashu = document.getElementById('pashuType').value;
     var details = document.getElementById('diseaseDetails').value.trim();
 
-    if (name === "" || phone === "" || details === "") {
+    if (name === "" || phone === "" |village===""| details === "") {
         alert("મહેરબાની કરીને બધી વિગતો ભરો!");
         return;
     }
 
     // ગૂગલ શીટમાં ડેટા મોકલવા માટે
     var scriptURL = "https://script.google.com/macros/s/AKfycbyVH3YcpFqSCSg-IS-ebwChYzZDyc_l3uwkzX7bgCj2IuMi_yJ6UcoFESNEH9ldaJgC/exec";
-    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({name: name, phone: phone, pashu: pashu, details: details}) });
+    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({name: name, phone: phone,village:village, pashu: pashu, details: details}) });
 
     // WhatsApp પર મેસેજ મોકલવા માટે
     var doctorPhone = "919825088959";
