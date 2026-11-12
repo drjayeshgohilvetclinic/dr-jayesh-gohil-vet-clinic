@@ -136,7 +136,7 @@
         
         <!-- Smart Pay Now Button with ID -->
         <a id="payNowBtn" href="upi://pay?pa=9825088959@axl&pn=Dr%20Jayesh%20Gohil&am=200&cu=INR" 
-           class="mt-2.5 inline-block w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg shadow transition">
+           class="mt-2.5 inline-block w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg shadow transition text-center">
            💳 Pay Now (₹200)
         </a>
     </div>
@@ -159,73 +159,38 @@
 
     </div>
 
-    <script>
-        function sendWhatsApp() {
-            const ownerName = document.getElementById('ownerName').value;
-            const mobileNo = document.getElementById('mobileNo').value;
-            const location = document.getElementById('location').value;
-            const animalType = document.getElementById('animalType').value;
-            const problemDetails = document.getElementById('problemDetails').value;
-            const selectedCase = document.querySelector('input[name="caseType"]:checked').value;
-
-            if (!ownerName || !mobileNo || !location || !animalType || !problemDetails) {
-                alert('કૃપા કરીને બધી વિગત ભરો.');
-                return;
-            }
-
-            const message = `*નવી ઓનલાઇન એપોઇન્ટમેન્ટ વિગત*\n\n` +
-                `૧) પશુપાલકનું નામ: ${ownerName}\n` +
-                `૨) મોબાઇલ નંબર: ${mobileNo}\n` +
-                `૩) ગામ / શહેર: ${location}\n` +
-                `૪) પશુનો પ્રકાર: ${animalType}\n` +
-                `૫) સમસ્યાની વિગત: ${problemDetails}\n` +
-                `૬) કેસનો પ્રકાર: ${selectedCase}\n\n` +
-                `મેં પેમેન્ટ પૂર્ણ કરેલ છે. કૃપા કરીને એપોઇન્ટમેન્ટ સમય આપવો.`;
-
-            const doctorNumber = "919825088959";
-            const whatsappUrl = `https://wa.me/${doctorNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-     <script>
+   <script>
     function updatePaymentAmount() {
-        // ૧. તપાસો કે કયું રેડિયો બટન સિલેક્ટ થયેલું છે
-        const r200 = document.querySelector('input[value="200"]');
-        const r300 = document.querySelector('input[value="300"]');
+        const selectedRadio = document.querySelector('input[name="casetype"]:checked');
+        const amount = selectedRadio ? selectedRadio.value : "200";
         
-        let amount = "200"; // ડિફોલ્ટ 200
-        if (r300 && r300.checked) {
-            amount = "300";
-        }
-
-        // ૨. તમારી UPI ID અહીં સેટ કરો
-        const upiID = "9825088959@axl";
+        const upiID = "9825088959@okbizaxis";
         const name = "Dr%20Jayesh%20Gohil";
         
-        // ૩. નવી UPI લિંક બનાવો જેમાં સાચી રકમ (am) જાય
+        // આ લિંક સીધી GPay કે PhonePe ખોલશે
         const upiLink = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
         
-        // ૪. Pay Now બટનને અપડેટ કરો
+        // Pay Now બટનને અપડેટ કરો
         const payBtn = document.getElementById('payNowBtn');
         if (payBtn) {
             payBtn.href = upiLink;
             payBtn.innerText = `💳 Pay Now (₹${amount})`;
         }
         
-        // ૫. QR કોડને પણ નવી રકમ મુજબ બદલો
+        // QR કોડને અપડેટ કરો
         const qrImg = document.getElementById('qrCodeImg');
         if (qrImg) {
             qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiLink)}`;
         }
     }
 
-    // કેસ બદલાય ત્યારે ઓટોમેટિક રકમ બદલાય તેના માટે લિસનર લગાવો
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    // રેડિયો બટન બદલાય ત્યારે ઓટોમેટિક રકમ બદલાય
+    document.querySelectorAll('input[name="casetype"]').forEach(radio => {
         radio.addEventListener('change', updatePaymentAmount);
     });
 
-    // પેજ ઓપન થાય ત્યારે પણ રન થાય
+    // પેજ લોડ થાય ત્યારે પણ રન થાય
     window.onload = updatePaymentAmount;
-</script>   
-    </script>
+</script>
 </body>
 </html>
