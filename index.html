@@ -41,10 +41,18 @@
                     <input type="text" id="location" placeholder="તમારા ગામનું નામ લખો..." class="w-full p-2.5 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
 
-                <!-- Animal Type -->
+                <!-- Animal Type (Dropdown / Select option like before) -->
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">પશુનો પ્રકાર:</label>
-                    <input type="text" id="animalType" placeholder="ગાય, ભેંસ, શ્વાન વગેરે..." class="w-full p-2.5 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    <select id="animalType" class="w-full p-2.5 border border-gray-300 rounded-xl text-sm bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+                        <option value="">-- પશુ પસંદ કરો --</option>
+                        <option value="ગાય">ગાય</option>
+                        <option value="ભેંસ">ભેંસ</option>
+                        <option value="બકરા / ઘેટાં">બકરા / ઘેટાં</option>
+                        <option value="શ્વાન (Dog)">શ્વાન (Dog)</option>
+                        <option value="બિલાડી (Cat)">બિલાડી (Cat)</option>
+                        <option value="અન્ય">અન્ય</option>
+                    </select>
                 </div>
 
                 <!-- Problem Details -->
@@ -78,21 +86,13 @@
                             <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9825088959@okbizaxis&pn=Dr%20Jayesh%20Gohil&am=200&cu=INR" class="mx-auto">
                             <span class="text-[10px] text-gray-500 mt-1 block">Google Pay / PhonePe / Paytm</span>
                             
-                            <!-- Smart Pay Now Button -->
-                            <a id="payNowBtn" href="upi://pay?pa=9825088959@okbizaxis&pn=Dr%20Jayesh%20Gohil&am=200&cu=INR" 
-                               class="mt-2.5 inline-block w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 px-3 rounded-lg shadow transition text-center">
-                               💳 Pay Now (₹200)
+                            <!-- Smart Pay Now Button: Clicking this will directly open GPay/PhonePe AND send WhatsApp message with details -->
+                            <a id="payNowBtn" href="#" onclick="handlePayAndWhatsApp(event)"
+                               class="mt-2.5 inline-block w-full bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2.5 px-3 rounded-lg shadow transition text-center">
+                               💳 Pay Now & Send Details (₹200)
                             </a>
                         </div>
                     </div>
-                </div>
-
-                <!-- WhatsApp Submit Button Section -->
-                <div class="mt-4 p-3 bg-amber-50 rounded-xl text-center border border-amber-200">
-                    <p class="text-[11px] text-gray-600 mb-2">પેમેન્ટ પૂર્ણ કર્યા બાદ આપની તમામ વિગત ડૉક્ટરશ્રીને વોટ્સએપથી મોકલવા માટે નીચેનું બટન દબાવો.</p>
-                    <button type="button" onclick="sendWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-4 rounded-xl shadow transition flex items-center justify-center gap-2 text-sm">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> વોટ્સએપ પર વિગત મોકલો
-                    </button>
                 </div>
 
             </form>
@@ -100,7 +100,7 @@
 
     </div>
 
-    <!-- JavaScript for Dynamic UPI Payment & WhatsApp Integration -->
+    <!-- JavaScript -->
     <script>
         function updatePaymentAmount() {
             const selectedRadio = document.querySelector('input[name="casetype"]:checked');
@@ -111,14 +111,13 @@
             
             const upiLink = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
             
-            // Update Pay Now Button
+            // Update Pay Now Button Text & Amount
             const payBtn = document.getElementById('payNowBtn');
             if (payBtn) {
-                payBtn.href = upiLink;
-                payBtn.innerText = `💳 Pay Now (₹${amount})`;
+                payBtn.innerText = `💳 Pay Now & Send Details (₹${amount})`;
             }
             
-            // Update QR Code Image based on selected amount
+            // Update QR Code Image
             const qrImg = document.getElementById('qrCodeImg');
             if (qrImg) {
                 qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiLink)}`;
@@ -133,24 +132,34 @@
         // Run on page load
         window.onload = updatePaymentAmount;
 
-        // WhatsApp Form Submission Function
-        function sendWhatsApp() {
+        // Function: Opens GPay/UPI app and opens WhatsApp with filled details simultaneously
+        function handlePayAndWhatsApp(event) {
             const ownerName = document.getElementById('ownerName').value.trim();
             const mobileNo = document.getElementById('mobileNo').value.trim();
             const location = document.getElementById('location').value.trim();
-            const animalType = document.getElementById('animalType').value.trim();
+            const animalType = document.getElementById('animalType').value;
             const problemDetails = document.getElementById('problemDetails').value.trim();
             
             const selectedRadio = document.querySelector('input[name="casetype"]:checked');
-            const selectedCase = selectedRadio && selectedRadio.value === "300" ? "ઇમરજન્સી કેસ (₹300)" : "જનરල් કેસ (₹200)";
+            const amount = selectedRadio ? selectedRadio.value : "200";
+            const selectedCase = amount === "300" ? "ઇમરજન્સી કેસ (₹300)" : "જનરල් કેસ (₹200)";
 
             if (!ownerName || !mobileNo) {
                 alert("કૃપા કરીને પશુપાલકનું નામ અને મોબાઈલ નંબર અવશ્ય ભરો.");
+                event.preventDefault(); // Stop opening links if validation fails
                 return;
             }
 
-            const doctorNumber = "919825088959";
+            // 1. Open UPI Payment App (GPay/PhonePe)
+            const upiID = "9825088959@okbizaxis";
+            const name = "Dr%20Jayesh%20Gohil";
+            const upiLink = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
+            
+            // Set the href dynamically right before click
+            event.currentTarget.href = upiLink;
 
+            // 2. Open WhatsApp with form details in a new tab/window after a short delay
+            const doctorNumber = "919825088959";
             const message = `*નવી ઓનલાઈન એપોઇન્ટમેન્ટ*\n` +
                             `1) પશુપાલકનું નામ: ${ownerName}\n` +
                             `2) મોબાઈલ નંબર: ${mobileNo}\n` +
@@ -161,7 +170,10 @@
                             `મેં પેમેન્ટ પૂર્ણ કરેલ છે. કૃપા કરીને એપોઇન્ટમેન્ટ કન્ફર્મ કરો.`;
 
             const whatsappUrl = `https://wa.me/${doctorNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1000);
         }
     </script>
 </body>
